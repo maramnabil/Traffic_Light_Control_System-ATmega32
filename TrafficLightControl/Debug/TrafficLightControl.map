@@ -671,7 +671,7 @@ END GROUP
  .debug_frame   0x00000238       0x54 MCAL/DIO Driver/dio.o
  .debug_frame   0x0000028c       0x58 MCAL/Timer Driver/timer.o
 
-.debug_str      0x00000000      0x764
+.debug_str      0x00000000      0x7fd
  *(.debug_str)
  .debug_str     0x00000000      0x196 D:/Microchip Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_str     0x00000196      0x350 Application/app.o
@@ -680,13 +680,13 @@ END GROUP
                                 0x1d7 (size before relaxing)
  .debug_str     0x00000559       0x5d ECUAL/ISRs/isr.o
                                 0x1c4 (size before relaxing)
- .debug_str     0x000005b6       0xdc ECUAL/LED Driver/led.o
-                                0x2d8 (size before relaxing)
- .debug_str     0x00000692       0x27 main.o
-                                0x199 (size before relaxing)
- .debug_str     0x000006b9       0x38 MCAL/DIO Driver/dio.o
+ .debug_str     0x000005b6      0x175 ECUAL/LED Driver/led.o
+                                0x31c (size before relaxing)
+ .debug_str     0x0000072b       0x27 main.o
+                                0x1dd (size before relaxing)
+ .debug_str     0x00000752       0x38 MCAL/DIO Driver/dio.o
                                 0x1bc (size before relaxing)
- .debug_str     0x000006f1       0x73 MCAL/Timer Driver/timer.o
+ .debug_str     0x0000078a       0x73 MCAL/Timer Driver/timer.o
                                 0x1c5 (size before relaxing)
 
 .debug_loc      0x00000000      0xefe

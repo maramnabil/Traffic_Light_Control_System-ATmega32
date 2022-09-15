@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000002e4  00000000  00000000  00003b90  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000764  00000000  00000000  00003e74  2**0
+ 10 .debug_str    000007fd  00000000  00000000  00003e74  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000efe  00000000  00000000  000045d8  2**0
+ 11 .debug_loc    00000efe  00000000  00000000  00004671  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000d0  00000000  00000000  000054d6  2**0
+ 12 .debug_ranges 000000d0  00000000  00000000  0000556f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -949,13 +949,13 @@ int main() {
 	if (appInitError == APP_ERROR)
  52e:	81 30       	cpi	r24, 0x01	; 1
  530:	39 f0       	breq	.+14     	; 0x540 <main+0x16>
-		return 1;
+		return 1;  // Any suitable error handling procedure
 	int appStartError = APP_start();
  532:	0e 94 a2 00 	call	0x144	; 0x144 <APP_start>
 	if (appStartError == APP_ERROR)
  536:	81 30       	cpi	r24, 0x01	; 1
  538:	31 f4       	brne	.+12     	; 0x546 <main+0x1c>
-		return 1;
+		return 1;  // Any suitable error handling procedure
  53a:	81 e0       	ldi	r24, 0x01	; 1
  53c:	90 e0       	ldi	r25, 0x00	; 0
  53e:	08 95       	ret
@@ -964,13 +964,13 @@ int main() {
 int main() {
 	int appInitError = APP_init();
 	if (appInitError == APP_ERROR)
-		return 1;
+		return 1;  // Any suitable error handling procedure
  540:	81 e0       	ldi	r24, 0x01	; 1
  542:	90 e0       	ldi	r25, 0x00	; 0
  544:	08 95       	ret
 	int appStartError = APP_start();
 	if (appStartError == APP_ERROR)
-		return 1;
+		return 1;  // Any suitable error handling procedure
 	return 0;
  546:	80 e0       	ldi	r24, 0x00	; 0
  548:	90 e0       	ldi	r25, 0x00	; 0
