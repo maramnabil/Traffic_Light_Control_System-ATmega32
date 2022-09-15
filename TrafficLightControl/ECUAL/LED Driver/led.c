@@ -132,26 +132,3 @@ ON_LED getOnLED() {
 		return CAR_RED_LED;
 	}
 }
-
-#if 0
-int main() {
-	//int n = NumberOfOverflows(5);
-	timer0_init(0);
-	LED_init(PORT_A, PIN0);
-	LED_init(PORT_A, PIN1);
-	LED_init(PORT_A, PIN2);
-	LED_init(PORT_B, PIN0);
-	LED_init(PORT_B, PIN1);
-	LED_init(PORT_B, PIN2);
-	//uint8_t porta1Value;
-	while (1) {
-		LED_on(PORT_A, PIN0);
-		_delay_ms(2000);
-		LED_on(PORT_A, PIN1);
-		//if (n == 5) {
-			//LED_on(PORT_A, PIN0);	
-		//}
-	}
-}
-
-#endif
