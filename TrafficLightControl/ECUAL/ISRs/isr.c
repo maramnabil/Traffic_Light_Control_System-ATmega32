@@ -5,6 +5,7 @@
  *  Author: hp
  */ 
 #include "../LED Driver/led.h"
+#include "../Button Driver/button.h"
 /************************************************************************/
 /* Interrupt 0 ISR implementation                                       */
 /************************************************************************/
@@ -28,27 +29,37 @@ ISR(INT0_vect) {
 		return by itself because probably a stack overflow occurs which prevents it from 
 		returning back to the main on its own, so I have to call it manually).*/
 	/************************************************************************/
-	if (getOnLED() == CAR_GREEN_LED || getOnLED() == CAR_YELLOW_LED) {
-		LED_off(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN);
-		LED_off(PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN);
-		LED_on(PED_RED_LED_PORT, PED_RED_LED_PIN);
-		_delay_ms(1000);
-		LED_off(PED_RED_LED_PORT, PED_RED_LED_PIN);
-		LED_off(CAR_GREEN_LED_PORT, CAR_GREEN_LED_PIN);
-		two_LEDs_blink(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN, PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN, 5000);
-		LED_on(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
-		LED_on(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
-		_delay_ms(5000);
-		
-		} else if (getOnLED() == CAR_RED_LED) {
-		LED_on(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
-		LED_on(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
-		_delay_ms(5000);
+	volatile uint32_t counter = 0; // counter for checking for long press
+	while (((PIND>>BUTTON_PIN)&1) == HIGH) {
+		_delay_ms(300);
+		counter++;
 	}
-	LED_off(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
-	two_LEDs_blink(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN, PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN, 5000);
-	LED_off(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
-	LED_on(CAR_GREEN_LED_PORT, CAR_GREEN_LED_PIN);
-	LED_on(PED_RED_LED_PORT, PED_RED_LED_PIN);
-	main();
+	if (counter <= 1) {
+		if (getOnLED() == CAR_GREEN_LED || getOnLED() == CAR_YELLOW_LED) {
+			LED_off(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN);
+			LED_off(PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN);
+			LED_on(PED_RED_LED_PORT, PED_RED_LED_PIN);
+			_delay_ms(1000);
+			LED_off(PED_RED_LED_PORT, PED_RED_LED_PIN);
+			LED_off(CAR_GREEN_LED_PORT, CAR_GREEN_LED_PIN);
+			two_LEDs_blink(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN, PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN, 5000);
+			LED_on(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
+			LED_on(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
+			_delay_ms(5000);
+			
+			} else if (getOnLED() == CAR_RED_LED) {
+			LED_on(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
+			LED_on(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
+			_delay_ms(5000);
+		}
+		LED_off(CAR_RED_LED_PORT, CAR_RED_LED_PIN);
+		two_LEDs_blink(CAR_YELLOW_LED_PORT, CAR_YELLOW_LED_PIN, PED_YELLOW_LED_PORT, PED_YELLOW_LED_PIN, 5000);
+		LED_off(PED_GREEN_LED_PORT, PED_GREEN_LED_PIN);
+		LED_on(CAR_GREEN_LED_PORT, CAR_GREEN_LED_PIN);
+		LED_on(PED_RED_LED_PORT, PED_RED_LED_PIN);
+		main();	
+	} else {
+		main();
+	}
+
 }
